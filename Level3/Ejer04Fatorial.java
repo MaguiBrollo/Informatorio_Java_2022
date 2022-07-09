@@ -13,25 +13,22 @@ public class Ejer04Fatorial {
         Map<Integer, Integer> factorial = new HashMap<>();
        
         System.out.println("\nLos numeros repetidos: ");
-        for(Integer num: numeros){
-            System.out.println(num);
-        }
-               
+        numeros.stream().forEach(System.out::println);
+              
         System.out.println("\nLos numeros sin repetir: ");
-        for(Integer num: numero2){
-            System.out.println(num);
-        }
+        numero2.stream().forEach(System.out::println);
+       
+        numero2.stream().forEach(num -> factorial.put(num, factorial(num)));
+        
+        System.out.println("\n   Número - Factorial: ");
+        List<String> mensajes = factorial.entrySet().stream()
+            .map(x->"Numero: "+ x.getKey() +" - Factorial: " + x.getValue())
+            .collect(Collectors.toList());     
+        mensajes.stream().forEach(System.out::println);
 
-        for(Integer num: numero2){
-            factorial.put(num, factorial(num));
-        }
-
-        //iterar y mostrar clave valor
-        System.out.println("\n  Número - Factorial: ");
-        for(Map.Entry<Integer,Integer> reg: factorial.entrySet()){
-            System.out.println("      "+reg.getKey()+"  -  "+ reg.getValue());
-        }
+        System.out.println("--------------------------------\n");
     }
+
     //-----------------------------------------------------
     public static int factorial(int valor){
         int resultado = 1;     

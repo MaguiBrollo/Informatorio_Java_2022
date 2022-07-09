@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Ejer05ListaAlumnos {
     
@@ -16,23 +17,24 @@ public class Ejer05ListaAlumnos {
 
         Map<String, Integer> alumnosMap = generarMap(alumnos);
 
+        System.out.println("\n       Alumno - Edad  ");
         mostrarMapAlumnos(alumnosMap);
+
+        System.out.println("--------------------------------\n");
     }
 
     private static void mostrarMapAlumnos(Map<String, Integer> alumnosMap) {
-        //iterar y mostrar clave valor
-        System.out.println("\n  Alumno          - Edad  ");
-        for(Map.Entry<String, Integer> reg: alumnosMap.entrySet()){
-            System.out.println("      "+reg.getKey()+"  -  "+ reg.getValue());
-        }
+        List<String> mensajes = alumnosMap.entrySet().stream()
+            .map(x->"        "+ x.getKey() +" - " + x.getValue())
+            .collect(Collectors.toList());     
+        mensajes.stream().forEach(System.out::println);
     }
 
     private static Map<String, Integer> generarMap(List<Alumno> alumnos) {
         Map<String, Integer> mapAlum = new HashMap<>();
-        for (Alumno alumno : alumnos) {
-            Period anios = Period.between(alumno.getFechaNac(), LocalDate.now());
-            mapAlum.put(alumno.getApellido()+" "+alumno.getNombre(), anios.getYears());
-        }
+        alumnos.stream()
+            .forEach(x -> mapAlum.put( x.getApellido()+", "+x.getNombre() , 
+                                  Period.between(x.getFechaNac(), LocalDate.now()).getYears() ));
         return mapAlum;
     }
 

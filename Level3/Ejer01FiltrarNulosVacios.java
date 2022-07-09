@@ -2,6 +2,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Ejer01FiltrarNulosVacios {
     public static void main(String[] args) {
@@ -15,34 +16,18 @@ public class Ejer01FiltrarNulosVacios {
         listaEntrada.add("");     //elemento vacío
         //listaEntrada.add("    ");     //elemento con espacio
 
-
         System.out.println("\n-------------------------------\nLISTA COMPLETA: ");
-        for(String ent: listaEntrada){               //iterar y mostrar
-            System.out.println(ent);
-        }
-
+        listaEntrada.stream().forEach(System.out::println);
+       
+        System.out.println("\nLista limpia de nulos y espacios con FOR: ");
         limpiarNuloEspacios(listaEntrada);
-        System.out.println("\nLista limpia de nulos: ");
-        for(String ent: listaEntrada){               //iterar y mostrar
-            System.out.println(ent);
-        }
-
+        listaEntrada.stream().forEach(System.out::println);
+               
+        System.out.println("\nLista limpia de nulos y espacios con STREAMS: ");
         limpiarNuloEspacios(listaEntrada);
-        System.out.println("\nLista limpia de nulos y espacios con Steams: ");
-        for(String ent: listaEntrada){               //iterar y mostrar
-            System.out.println(ent);
-        }
-
+        listaEntrada.stream().forEach(System.out::println);
+       
         System.out.println("\n--------------------- ");
-    }
-
-    public static List<String> limpiarNuloEspacios(List<String> listaString) {
-        for(int i = 0; i < listaString.size(); i++){
-            if (listaString.get(i) == null || listaString.get(i).trim().isEmpty() ) {
-                listaString.remove(i);
-            }
-        }
-        return listaString;
     }
 
     public static  List<String> limpiarNuloEspaciosConStreams(List<String> listaString) {
@@ -55,5 +40,14 @@ public class Ejer01FiltrarNulosVacios {
 
     private static boolean isNotEmpty(String valor){
         return !valor.trim().isEmpty();
+    }
+
+    public static List<String> limpiarNuloEspacios(List<String> listaString) {
+        for(int i = 0; i < listaString.size(); i++){
+            if (listaString.get(i) == null || listaString.get(i).trim().isEmpty() ) {
+                listaString.remove(i);
+            }
+        }
+        return listaString;
     }
 }

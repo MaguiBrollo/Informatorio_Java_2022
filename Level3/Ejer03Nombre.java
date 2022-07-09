@@ -11,10 +11,8 @@ public class Ejer03Nombre {
 
         //iterar y mostrar
         System.out.println("\n------------------\nLas palabras son: ");
-        for(String nom: palabras){
-            System.out.println(nom);
-        }
-
+        palabras.stream().forEach(System.out::println);
+        
         System.out.print("\nIngrese una letra para buscar: ");
         letraBuscada = scan.nextLine();
                
